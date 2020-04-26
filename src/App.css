@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -26,13 +26,88 @@
 
 .App-link {
   color: #61dafb;
+} */
+
+.Link-style{
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+.dark-text{
+  color: #282c34
 }
 
-@keyframes App-logo-spin {
+.Login-form{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 90vh;
+} 
+.Login-form__form{
+  display: flex;
+  justify-content: center;
+}
+.Login-form__error{
+  color: red;
+  margin-top: 20px;
+}
+.Appbar-logout{
+  display: flex;
+  justify-content: center;
+}
+.Appbar-logout__user{
+  color: tomato;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  margin-right: 20px;
+}
+.Post-List{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.Post-Page{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.Post-Page__button, .Post-Page__comments, .Post-Page__post{
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.comment-item{
+  background: #e8edff;
+  border: 1px solid #9bb0fa;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 5px;
+  max-width: 1200px;
+}
+
+@media screen and (max-width: 450px){
+  .Link-style{
+    font-size: 16px;
+  }
+  .Appbar-logout{
+    display: block;
+    text-align: right;
+  }
+  .Appbar-logout__user{
+    display: block;
+    margin: 0;
+  }
+}
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+} */

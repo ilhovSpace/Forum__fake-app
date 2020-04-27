@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import {GlobalContextState, GlobalContextActions} from '../../context/GlobalState';
+import './style.css';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ITEM_HEIGHT = 40;
+const ITEM_HEIGHT = 100;
 const ITEM_PADDING_TOP = 3;
 const MenuProps = {
   PaperProps: {
@@ -48,7 +49,7 @@ export default function MultipleSelect() {
   // const [selectedUsers, setSelectedUsers] = useState([])
   const classes = useStyles();
   const [personName, setPersonName] = React.useState([]);
-
+console.log(personName)
   useEffect(()=>{
     getAllUsers()
   },[])
@@ -80,9 +81,9 @@ useEffect(()=>{
 // console.log('render filter')
   return (
     <div>
-      <FormControl className={classes.formControl}>
+      <FormControl >
         <InputLabel id="demo-mutiple-checkbox-label">Filter По пользователям</InputLabel>
-        <Select
+        <Select className='ala'
           labelId="demo-mutiple-checkbox-label"
           id="demo-mutiple-checkbox"
           multiple
@@ -93,7 +94,7 @@ useEffect(()=>{
           MenuProps={MenuProps}
         >
           {users.map(({name, id}) => (
-            <MenuItem key={name} value={id} id={id}>
+            <MenuItem className='ala' key={name} value={id} id={id}>
               <Checkbox checked={personName.indexOf(id) > -1} />
               <ListItemText primary={`${name} (user id: ${id})`} />
             </MenuItem>

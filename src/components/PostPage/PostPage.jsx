@@ -28,7 +28,7 @@ const PostPage = (props) => {
 
   useEffect(() => {
     getSinglePost(id);
-    return clearSinglePost();
+    return clearSinglePost;
   }, []);
 
   return (

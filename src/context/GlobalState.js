@@ -20,8 +20,10 @@ const initialState = {
     userData: TestUser,
   },
   posts: [],
+  randomPosts: null,
   postsList: [],
   albums: [],
+  randomAlbums: null,
   users: [],
   singlePost: {
     post: null,
@@ -33,6 +35,10 @@ const initialState = {
 export const GlobalContextState = createContext();
 export const GlobalContextActions = createContext();
 
+const randomSliceArray = (array) => {
+  return array.sort(() => Math.random() - 0.5).slice(0, 5);
+};
+
 export const GlobalContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
@@ -42,6 +48,34 @@ export const GlobalContextProvider = ({ children }) => {
       .then((posts) =>
         dispatch({
           type: 'GET_ALL_POSTS',
+          payload: posts,
+        }),
+      );
+  };
+
+  const getPartPosts = (startPagination, filterParams) => {
+    console.log(startPagination);
+    const userFilter = '';
+    fetch(
+      `https://jsonplaceholder.typicode.com/posts?${userFilter}_limit=10&_start=${startPagination}`,
+    )
+      .then((response) => response.json())
+      .then((posts) =>
+        dispatch({
+          type: 'GET_PART_POSTS',
+          payload: posts,
+        }),
+      );
+  };
+
+  const getRandomPosts = () => {
+    console.log('getRandomPosts');
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((response) => response.json())
+      .then((res) => randomSliceArray(res))
+      .then((posts) =>
+        dispatch({
+          type: 'GET_RANDOM_POSTS',
           payload: posts,
         }),
       );
@@ -78,6 +112,7 @@ export const GlobalContextProvider = ({ children }) => {
           payload: response,
         }),
       );
+
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
       .then((response) => response.json())
       .then((response) =>
@@ -99,6 +134,20 @@ export const GlobalContextProvider = ({ children }) => {
       type: 'CLEAR_SINGLE_POST',
     });
   };
+
+  const clearPosts = () => {
+    dispatch({
+      type: 'CLEAR_POSTS',
+    });
+  };
+
+  const clearRandomArrays = () => {
+    console.log('clearRandomArrays');
+    dispatch({
+      type: 'CLEAR_RANDOM_ARRAYS',
+    });
+  };
+
   const filterPosts = (selectedUsers) => {
     const newFilterPosts =
       selectedUsers && selectedUsers.length
@@ -139,6 +188,10 @@ export const GlobalContextProvider = ({ children }) => {
       getSinglePost,
       addCommentToSinglePost,
       clearSinglePost,
+      getRandomPosts,
+      clearRandomArrays,
+      getPartPosts,
+      clearPosts,
       logout,
     }),
     [],
@@ -153,6 +206,7 @@ export const GlobalContextProvider = ({ children }) => {
         user: state.user,
         singlePost: state.singlePost,
         postsList: state.postsList,
+        randomPosts: state.randomPosts,
         checkUser,
         filterPosts,
       }}

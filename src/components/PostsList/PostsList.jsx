@@ -1,69 +1,55 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {GlobalContextState, GlobalContextActions} from '../../context/GlobalState';
-import PostItem from '../PostItem';
-import LazyLoad from 'react-lazyload';
-import FilterPost from '../FilterPost';
+import React, { useContext, useEffect, useState } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import InfiniteScroll from 'react-infinite-scroller';
 
+import {
+  GlobalContextState,
+  GlobalContextActions,
+} from '../../context/GlobalState';
+import PostItem from '../PostItem';
 
 const PostsList = () => {
-const {posts, postsList, filterPosts} = useContext(GlobalContextState)
-const { getAllPosts } = useContext(GlobalContextActions)
+  const { posts } = useContext(GlobalContextState);
+  const { getPartPosts, clearPosts } = useContext(GlobalContextActions);
+  const [startPagination, setStartPagination] = useState(0);
+  const [valueHasMore, setValueHasMore] = useState(false);
 
-//  console.log(postsList)
+  const loadFunc = () => {
+    setValueHasMore(false);
+    setStartPagination(startPagination + 10);
+    getPartPosts(startPagination + 10);
+  };
 
-useEffect(()=>{
-  filterPosts()
-},[posts])
+  useEffect(() => {
+    setValueHasMore(true);
+  }, [posts]);
 
-useEffect(()=>{
-  getAllPosts()
-},[])
-// console.log('render postList')
+  useEffect(() => {
+    getPartPosts(startPagination);
+    return clearPosts;
+  }, []);
+
   return (
-      <div className='Post-List'>
-      {postsList.map(post => (
-        <LazyLoad key={post.id} height={200} placeholder={<div>Loading...</div>}>
-          <PostItem key={post.id} post={post} linkToPost={post.id}/>
-        </LazyLoad>
-      ))}
-      </div>
-  )
-}
+    <div className="Post-List">
+      {!!posts.length && (
+        <InfiniteScroll
+          loadMore={loadFunc}
+          hasMore={valueHasMore}
+          threshold={300}
+        >
+          {posts.map((post) => (
+            <PostItem key={post.id} post={post} linkToPost={post.id} />
+          ))}
+        </InfiniteScroll>
+      )}
+      {!valueHasMore && (
+        <div>
+          <CircularProgress />
+          <div>Loading...</div>
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default PostsList
-
-
-
-// const PostsList = () => {
-//   // const {posts, users, getAllPosts} = useContext(GlobalContext)
-//   // const [postsList, setPostList] = useState(posts)
-//   // const [userPostFilter, setUserPostFilter] = useState([])
-
-//   // const filter = () => {
-//   //   if(userPostFilter.length >= 1){
-//   //     const filterPosts = posts.filter(({ userId }) => userPostFilter.includes(userId));
-//   //     setPostList(filterPosts)
-//   //   } else {
-//   //     setPostList(posts)
-//   //   }
-//   // }
-//   // useEffect(() => {
-//   //   filter()
-//   //   console.log('call useEffect Pos')
-//   // }, [userPostFilter])
-//   // console.log(userPostFilter, postsList, posts)
-//   return (
-//     <div>
-//       {/* <FilterPost users={users} setUserPostFilter={setUserPostFilter}/>
-//       {postsList.map(post => (
-//         <div key={post.id}>
-//         <Paper>
-//           <Link to={`/post/${post.id}`}><h2>{post.title}</h2></Link>
-//           <p>{post.body}</p>
-//           <span>User id: {post.userId}</span>
-//           </Paper>
-//         </div>
-//       ))} */}
-//     </div>
-//   )
-// }
+export default PostsList;

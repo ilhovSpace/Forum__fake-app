@@ -1,19 +1,16 @@
-import React,{useState} from 'react';
-
+import React, { useState, useContext, useEffect } from 'react';
 import Select from 'react-select';
-
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-]
+import {
+  GlobalContextState,
+  GlobalContextActions,
+} from '../../context/GlobalState';
 
 const groupStyles = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
 };
+
 const groupBadgeStyles = {
   backgroundColor: '#EBECF0',
   borderRadius: '2em',
@@ -27,24 +24,49 @@ const groupBadgeStyles = {
   textAlign: 'center',
 };
 
-const formatGroupLabel = data => (
-<div style={groupStyles}>
-    <span>{data.label}</span>
-    <span style={groupBadgeStyles}>{data.options.length}</span>
-  </div>
-);
-
 const FilterSelect = () => {
-  const [state, setState] = useState([])
-  console.log(state)
+  const [state, setState] = useState([]);
+  const [options, setOptions] = useState([]);
+  const { users } = useContext(GlobalContextState);
+  const { getAllUsers } = useContext(GlobalContextActions);
+
+  const formatGroupLabel = (data) => (
+    <div style={groupStyles}>
+      <span>{data.label}</span>
+      <span style={groupBadgeStyles}>{data.options.length}</span>
+    </div>
+  );
+  const handleChange = (e) => {
+    setState(e);
+  };
+
+  useEffect(()=>{
+      console.log('запрос на сервер', state)
+  }, [state])
+
+  useEffect(() => {
+    console.log(users);
+    const opt = users.map((user) => ({
+      label: `${user.username} (id:${user.id})`,
+      value: user.id,
+    }));
+    setOptions(opt);
+    console.log('options', options);
+  }, [users]);
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  console.log(state);
   return (
     <Select
-    isMulti
-    options={options}
-    onChange={setState}
-    formatGroupLabel={formatGroupLabel}
-  />
-  )
-}
+      isMulti
+      options={options}
+      onChange={handleChange}
+      formatGroupLabel={formatGroupLabel}
+    />
+  );
+};
 
-export default FilterSelect
+export default FilterSelect;

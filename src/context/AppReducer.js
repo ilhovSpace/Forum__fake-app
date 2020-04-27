@@ -5,6 +5,27 @@ export default (state, action) => {
         ...state,
         posts: action.payload,
       };
+    case 'GET_PART_POSTS':
+      return {
+        ...state,
+        posts: [...state.posts, ...action.payload],
+      };
+    case 'CLEAR_POST':
+      return {
+        ...state,
+        posts: [],
+      };
+    case 'GET_RANDOM_POSTS':
+      return {
+        ...state,
+        randomPosts: action.payload,
+      };
+    case 'CLEAR_RANDOM_ARRAYS':
+      return {
+        ...state,
+        randomPosts: null,
+        randomAlbums: null,
+      };
     case 'GET_ALL_ALBUMS':
       return {
         ...state,

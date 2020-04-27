@@ -1,34 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import {
-  GlobalContextState,
-  GlobalContextActions,
-} from '../../context/GlobalState';
 import PostItem from '../PostItem';
 
-const PostsList = () => {
-  const { posts } = useContext(GlobalContextState);
-  const { getPartPosts, clearPosts } = useContext(GlobalContextActions);
-  const [startPagination, setStartPagination] = useState(0);
-  const [valueHasMore, setValueHasMore] = useState(false);
-
-  const loadFunc = () => {
-    setValueHasMore(false);
-    setStartPagination(startPagination + 10);
-    getPartPosts(startPagination + 10);
-  };
-
-  useEffect(() => {
-    setValueHasMore(true);
-  }, [posts]);
-
-  useEffect(() => {
-    getPartPosts(startPagination);
-    return clearPosts;
-  }, []);
-
+const PostsList = ({ posts, loadFunc, valueHasMore, isOverPosts }) => {
+  console.log(isOverPosts);
   return (
     <div className="Post-List">
       {!!posts.length && (
@@ -42,7 +19,7 @@ const PostsList = () => {
           ))}
         </InfiniteScroll>
       )}
-      {!valueHasMore && (
+      {!valueHasMore && isOverPosts && (
         <div>
           <CircularProgress />
           <div>Loading...</div>

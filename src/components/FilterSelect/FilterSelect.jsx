@@ -24,11 +24,7 @@ const groupBadgeStyles = {
   textAlign: 'center',
 };
 
-const FilterSelect = () => {
-  const [state, setState] = useState([]);
-  const [options, setOptions] = useState([]);
-  const { users } = useContext(GlobalContextState);
-  const { getAllUsers } = useContext(GlobalContextActions);
+const FilterSelect = ({ filterParams, setFilterParams, options }) => {
 
   const formatGroupLabel = (data) => (
     <div style={groupStyles}>
@@ -37,28 +33,10 @@ const FilterSelect = () => {
     </div>
   );
   const handleChange = (e) => {
-    setState(e);
+    setFilterParams(e);
   };
 
-  useEffect(()=>{
-      console.log('запрос на сервер', state)
-  }, [state])
-
-  useEffect(() => {
-    console.log(users);
-    const opt = users.map((user) => ({
-      label: `${user.username} (id:${user.id})`,
-      value: user.id,
-    }));
-    setOptions(opt);
-    console.log('options', options);
-  }, [users]);
-
-  useEffect(() => {
-    getAllUsers();
-  }, []);
-
-  console.log(state);
+  console.log('Render Filter');
   return (
     <Select
       isMulti

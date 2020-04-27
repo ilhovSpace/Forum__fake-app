@@ -53,9 +53,11 @@ export const GlobalContextProvider = ({ children }) => {
       );
   };
 
+
+
   const getPartPosts = (startPagination, filterParams) => {
-    console.log(startPagination);
-    const userFilter = '';
+    const userFilter = filterParams ? filterParams.map(item => `userId=${item.value}&`).join('') : ''
+    console.log(filterParams, userFilter);
     fetch(
       `https://jsonplaceholder.typicode.com/posts?${userFilter}_limit=10&_start=${startPagination}`,
     )

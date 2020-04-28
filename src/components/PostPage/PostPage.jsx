@@ -8,23 +8,12 @@ import {
   GlobalContextActions,
 } from '../../context/GlobalState';
 
-const PostPage = (props) => {
-  const id = props.match.params.id;
-  const { singlePost } = useContext(GlobalContextState);
+const PostPage = ({ match }) => {
+  const { id } = match.params;
+  const { singlePost, user } = useContext(GlobalContextState);
   const { getSinglePost, addCommentToSinglePost, clearSinglePost } = useContext(
     GlobalContextActions,
   );
-
-  console.log(singlePost.comments);
-  const addComment = () => {
-    addCommentToSinglePost({
-      postId: 1,
-      id: 1,
-      name: 'id labore ex et quam laborum',
-      email: 'Eliseo@gardner.biz',
-      body: 'laudantium enim quasi est quidem magnam voluptate ',
-    });
-  };
 
   useEffect(() => {
     getSinglePost(id);
@@ -35,7 +24,10 @@ const PostPage = (props) => {
     <div className="Post-Page">
       <div className="Post-Page__post">
         {!singlePost.post ? (
-          <CircularProgress />
+          <div>
+            <CircularProgress />
+            <div>Loading post ...</div>
+          </div>
         ) : (
           <div>
             <PostItem post={singlePost.post} />
@@ -44,17 +36,24 @@ const PostPage = (props) => {
       </div>
       <div className="Post-Page__comments">
         {!singlePost.comments ? (
-          <CircularProgress />
+          <div>
+            <CircularProgress color="secondary" />
+            <div>Loading comments ...</div>
+          </div>
         ) : (
           <div>
             {singlePost.comments.map((comment) => (
               <CommentItem key={comment.id} comment={comment} />
             ))}
+            <div className="Post-Page__button">
+              <AddComment
+                addComment={addCommentToSinglePost}
+                user={user}
+                postId={id}
+              />
+            </div>
           </div>
         )}
-      </div>
-      <div className="Post-Page__button">
-        <AddComment addComment={addComment} />
       </div>
     </div>
   );

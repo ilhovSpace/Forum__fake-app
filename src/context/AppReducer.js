@@ -5,20 +5,50 @@ export default (state, action) => {
         ...state,
         posts: action.payload,
       };
+    case 'ADD_NEW_POST':
+      return {
+        ...state,
+        posts: [action.payload, ...state.posts],
+      };
     case 'GET_PART_POSTS':
       return {
         ...state,
         posts: [...state.posts, ...action.payload],
+      };
+    case 'GET_PART_ALBUMS':
+      return {
+        ...state,
+        albums: [...state.albums, ...action.payload],
+      };
+    case 'GET_PART_PHOTOS':
+      return {
+        ...state,
+        photos: [...state.photos, ...action.payload],
+      };
+    case 'CLEAR_PHOTOS':
+      return {
+        ...state,
+        photos: [],
       };
     case 'CLEAR_POSTS':
       return {
         ...state,
         posts: [],
       };
+    case 'CLEAR_ALBUMS':
+      return {
+        ...state,
+        albums: [],
+      };
     case 'GET_RANDOM_POSTS':
       return {
         ...state,
         randomPosts: action.payload,
+      };
+    case 'GET_RANDOM_ALBUMS':
+      return {
+        ...state,
+        randomAlbums: action.payload,
       };
     case 'CLEAR_RANDOM_ARRAYS':
       return {

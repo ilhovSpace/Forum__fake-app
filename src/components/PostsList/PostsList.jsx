@@ -5,7 +5,6 @@ import InfiniteScroll from 'react-infinite-scroller';
 import PostItem from '../PostItem';
 
 const PostsList = ({ posts, loadFunc, valueHasMore, isOverPosts }) => {
-  console.log(isOverPosts);
   return (
     <div className="Post-List">
       {!!posts.length && (

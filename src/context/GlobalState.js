@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useReducer,
-  useContext,
-  useEffect,
-  useMemo,
-} from 'react';
+import React, { createContext, useReducer, useMemo } from 'react';
 import AppReducer from './AppReducer';
 
 const TestUser = {
@@ -29,6 +23,7 @@ const initialState = {
     post: null,
     comments: null,
   },
+  photos: [],
   singleAlbum: {},
 };
 
@@ -53,11 +48,10 @@ export const GlobalContextProvider = ({ children }) => {
       );
   };
 
-
-
   const getPartPosts = (startPagination, filterParams) => {
-    const userFilter = filterParams ? filterParams.map(item => `userId=${item.value}&`).join('') : ''
-    console.log(filterParams, userFilter);
+    const userFilter = filterParams
+      ? filterParams.map((item) => `userId=${item.value}&`).join('')
+      : '';
     fetch(
       `https://jsonplaceholder.typicode.com/posts?${userFilter}_limit=10&_start=${startPagination}`,
     )
@@ -70,8 +64,36 @@ export const GlobalContextProvider = ({ children }) => {
       );
   };
 
+  const getPartAlbums = (startPagination, filterParams) => {
+    const userFilter = filterParams
+      ? filterParams.map((item) => `userId=${item.value}&`).join('')
+      : '';
+    fetch(
+      `https://jsonplaceholder.typicode.com/albums?${userFilter}_limit=10&_start=${startPagination}`,
+    )
+      .then((response) => response.json())
+      .then((posts) =>
+        dispatch({
+          type: 'GET_PART_ALBUMS',
+          payload: posts,
+        }),
+      );
+  };
+
+  const getPartPhotos = (startPagination, id) => {
+    fetch(
+      `https://jsonplaceholder.typicode.com/albums/${id}/photos?_limit=10&_start=${startPagination}`,
+    )
+      .then((response) => response.json())
+      .then((photos) =>
+        dispatch({
+          type: 'GET_PART_PHOTOS',
+          payload: photos,
+        }),
+      );
+  };
+
   const getRandomPosts = () => {
-    console.log('getRandomPosts');
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then((response) => response.json())
       .then((res) => randomSliceArray(res))
@@ -89,6 +111,18 @@ export const GlobalContextProvider = ({ children }) => {
       .then((albums) =>
         dispatch({
           type: 'GET_ALL_ALBUMS',
+          payload: albums,
+        }),
+      );
+  };
+
+  const getRandomAlbums = () => {
+    fetch('https://jsonplaceholder.typicode.com/albums')
+      .then((response) => response.json())
+      .then((res) => randomSliceArray(res))
+      .then((albums) =>
+        dispatch({
+          type: 'GET_RANDOM_ALBUMS',
           payload: albums,
         }),
       );
@@ -143,8 +177,19 @@ export const GlobalContextProvider = ({ children }) => {
     });
   };
 
+  const clearPhotos = () => {
+    dispatch({
+      type: 'CLEAR_PHOTOS',
+    });
+  };
+
+  const clearAlbums = () => {
+    dispatch({
+      type: 'CLEAR_ALBUMS',
+    });
+  };
+
   const clearRandomArrays = () => {
-    console.log('clearRandomArrays');
     dispatch({
       type: 'CLEAR_RANDOM_ARRAYS',
     });
@@ -166,13 +211,17 @@ export const GlobalContextProvider = ({ children }) => {
       payload: comment,
     });
   };
-
+  const addNewPost = (post) => {
+    dispatch({
+      type: 'ADD_NEW_POST',
+      payload: post,
+    });
+  };
   const checkUser = (loginValue) => {
     const userFilter = state.users.filter(({ email }) => email === loginValue);
 
     if (userFilter.length) {
       const [userObj] = userFilter;
-      console.log(userObj);
       dispatch({
         type: 'USER_AUTHORIZATION',
         payload: userObj,
@@ -188,12 +237,18 @@ export const GlobalContextProvider = ({ children }) => {
       getAllAlbums,
       getAllUsers,
       getSinglePost,
+      getRandomPosts,
+      getPartPosts,
+      getPartAlbums,
+      getPartPhotos,
+      getRandomAlbums,
+      addNewPost,
       addCommentToSinglePost,
       clearSinglePost,
-      getRandomPosts,
       clearRandomArrays,
-      getPartPosts,
       clearPosts,
+      clearAlbums,
+      clearPhotos,
       logout,
     }),
     [],
@@ -209,6 +264,8 @@ export const GlobalContextProvider = ({ children }) => {
         singlePost: state.singlePost,
         postsList: state.postsList,
         randomPosts: state.randomPosts,
+        randomAlbums: state.randomAlbums,
+        photos: state.photos,
         checkUser,
         filterPosts,
       }}

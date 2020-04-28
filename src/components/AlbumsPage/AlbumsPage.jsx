@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import PostsList from '../PostsList';
 import {
   GlobalContextState,
   GlobalContextActions,
 } from '../../context/GlobalState';
 import FilterSelect from '../FilterSelect';
-import AddPost from '../AddPost';
+import AlbumsList from '../AlbumsList';
 
-const PostsPage = () => {
-  const { users, posts } = useContext(GlobalContextState);
-  const { getAllUsers, getPartPosts, clearPosts } = useContext(
+const AlbumsPage = () => {
+  const { users, albums } = useContext(GlobalContextState);
+  const { getAllUsers, getPartAlbums, clearAlbums } = useContext(
     GlobalContextActions,
   );
   const [prevLength, setPrevLength] = useState(0);
@@ -23,20 +22,20 @@ const PostsPage = () => {
 
   useEffect(() => {
     getAllUsers();
-    return clearPosts;
+    return clearAlbums;
   }, []);
 
   const loadFunc = () => {
     setValueHasMore(false);
     setIsOverPosts(false);
     setStartPagination(startPagination + 10);
-    getPartPosts(startPagination + 10, filterParams);
+    getPartAlbums(startPagination + 10, filterParams);
   };
 
   useEffect(() => {
-    clearPosts();
+    clearAlbums();
     setStartPagination(0);
-    getPartPosts(0, filterParams);
+    getPartAlbums(0, filterParams);
     setIsDisabled(true);
   }, [filterParams]);
 
@@ -49,38 +48,40 @@ const PostsPage = () => {
   }, [users]);
 
   useEffect(() => {
-    if(posts.length){
+    if (albums.length) {
       setIsDisabled(false);
-    } 
-    if (posts.length && posts.length === prevLength) {
+    }
+    if (albums.length && albums.length === prevLength) {
       setValueHasMore(false);
       setIsOverPosts(true);
     } else {
-      setPrevLength(posts.length);
+      setPrevLength(albums.length);
       setValueHasMore(true);
     }
-  }, [posts]);
+  }, [albums]);
 
   return (
-    <div>
+    <div className="Album-Page">
       <FilterSelect
         setFilterParams={setFilterParams}
         options={options}
         isDisabled={isDisabled}
       />
-      {!posts.length ? (
-        <CircularProgress />
+      {!albums.length ? (
+        <div className="Album-Page__progress">
+          <CircularProgress color="secondary" />
+          <div>Loading Albums...</div>
+        </div>
       ) : (
-        <PostsList
-          posts={posts}
+        <AlbumsList
+          albums={albums}
           loadFunc={loadFunc}
           valueHasMore={valueHasMore}
           isOverPosts={!isOverPosts}
         />
       )}
-      <AddPost />
     </div>
   );
 };
 
-export default PostsPage;
+export default AlbumsPage;

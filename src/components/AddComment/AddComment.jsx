@@ -4,11 +4,20 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function AddComment({ addComment }) {
+export default function AddComment({ addComment, user, postId }) {
   const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState({
+    postId,
+    name: '',
+    email: user.isAuth && user.userData.email,
+    body: '',
+  });
+  const handleChange = (e) => {
+    setValue({ ...value, [e.target.id]: e.target.value });
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -16,7 +25,7 @@ export default function AddComment({ addComment }) {
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    addComment();
+    addComment({ ...value, id: uuidv4() });
     setOpen(false);
   };
 
@@ -27,7 +36,7 @@ export default function AddComment({ addComment }) {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
+        Add Comment
       </Button>
       <Dialog
         open={open}
@@ -35,34 +44,41 @@ export default function AddComment({ addComment }) {
         aria-labelledby="form-dialog-title"
       >
         <form onSubmit={handleAddComment}>
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+          <DialogTitle id="form-dialog-title">Add New Comment</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="email"
-              label="Email Address"
-              type="email"
-              fullWidth
-              required
-            />
+            {!user.isAuth && (
+              <TextField
+                margin="dense"
+                id="email"
+                label="Email Address"
+                type="email"
+                variant="outlined"
+                inputProps={{ minLength: '3', maxLength: '100' }}
+                onChange={handleChange}
+                fullWidth
+                required
+              />
+            )}
             <TextField
               margin="dense"
               id="name"
-              label="Your Name"
+              label="Title Comment"
               type="text"
+              variant="outlined"
+              inputProps={{ minLength: '2', maxLength: '100' }}
+              onChange={handleChange}
               fullWidth
               required
             />
             <TextField
               margin="dense"
-              id="comment"
-              label="Comment"
+              id="body"
+              label="Body Comment"
               type="text"
+              variant="outlined"
+              inputProps={{ minLength: '2', maxLength: '500' }}
+              onChange={handleChange}
+              multiline
               fullWidth
               required
             />

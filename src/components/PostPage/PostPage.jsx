@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import PostItem from '../PostItem';
-import AddComment from '../AddComment';
-import CommentItem from '../CommentItem';
+
 import {
   GlobalContextState,
   GlobalContextActions,
 } from '../../context/GlobalState';
+import Loader from '../Loader';
+import PostItem from '../PostItem';
+import AddComment from '../AddComment';
+import CommentItem from '../CommentItem';
 
 const PostPage = ({ match }) => {
   const { id } = match.params;
@@ -24,10 +25,7 @@ const PostPage = ({ match }) => {
     <div className="Post-Page">
       <div className="Post-Page__post">
         {!singlePost.post ? (
-          <div>
-            <CircularProgress />
-            <div>Loading post ...</div>
-          </div>
+          <Loader info="post" color="primary" />
         ) : (
           <div>
             <PostItem post={singlePost.post} />
@@ -36,12 +34,10 @@ const PostPage = ({ match }) => {
       </div>
       <div className="Post-Page__comments">
         {!singlePost.comments ? (
-          <div>
-            <CircularProgress color="secondary" />
-            <div>Loading comments ...</div>
-          </div>
+          <Loader info="comments" color="secondary" />
         ) : (
-          <div>
+          <div className="">
+            <div className="Post-Page__header">Comments</div>
             {singlePost.comments.map((comment) => (
               <CommentItem key={comment.id} comment={comment} />
             ))}

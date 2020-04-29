@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
+
 import {
   GlobalContextState,
   GlobalContextActions,
 } from '../../context/GlobalState';
 import FilterSelect from '../FilterSelect';
 import AlbumsList from '../AlbumsList';
+import Loader from '../Loader';
 
 const AlbumsPage = () => {
   const { users, albums } = useContext(GlobalContextState);
@@ -68,10 +69,7 @@ const AlbumsPage = () => {
         isDisabled={isDisabled}
       />
       {!albums.length ? (
-        <div className="Album-Page__progress">
-          <CircularProgress color="secondary" />
-          <div>Loading Albums...</div>
-        </div>
+         <Loader info="Albums" color="secondary" />
       ) : (
         <AlbumsList
           albums={albums}

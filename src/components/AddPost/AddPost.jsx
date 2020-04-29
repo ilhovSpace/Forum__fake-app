@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 import { v4 as uuidv4 } from 'uuid';
+
 import {
   GlobalContextState,
   GlobalContextActions,
@@ -99,7 +100,7 @@ export default function AddPost() {
               Cancel
             </Button>
             <Button type="submit" color="primary">
-              Add comment
+              Add Post
             </Button>
           </DialogActions>
         </form>

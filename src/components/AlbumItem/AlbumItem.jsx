@@ -13,7 +13,7 @@ const AlbumItem = ({ album }) => {
         </div>
         <div className="Album-item__author">Author: user id {album.userId}</div>
         <div className="Album-item__tilte">{album.title}</div>
-        <Link to={`/album/${album.id}`} className="Album-item__link">
+        <Link to={`/album/${album.id}`} className="my-link">
           <Button variant="outlined" color="secondary" size="small">
             View Album
           </Button>

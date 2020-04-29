@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import PostsList from '../PostsList';
+
 import {
   GlobalContextState,
   GlobalContextActions,
 } from '../../context/GlobalState';
+import Loader from '../Loader';
+import PostsList from '../PostsList';
 import FilterSelect from '../FilterSelect';
 import AddPost from '../AddPost';
 
@@ -49,9 +50,9 @@ const PostsPage = () => {
   }, [users]);
 
   useEffect(() => {
-    if(posts.length){
+    if (posts.length) {
       setIsDisabled(false);
-    } 
+    }
     if (posts.length && posts.length === prevLength) {
       setValueHasMore(false);
       setIsOverPosts(true);
@@ -62,14 +63,14 @@ const PostsPage = () => {
   }, [posts]);
 
   return (
-    <div>
+    <div className="Posts-page">
       <FilterSelect
         setFilterParams={setFilterParams}
         options={options}
         isDisabled={isDisabled}
       />
       {!posts.length ? (
-        <CircularProgress />
+        <Loader info="posts" color="primary" />
       ) : (
         <PostsList
           posts={posts}

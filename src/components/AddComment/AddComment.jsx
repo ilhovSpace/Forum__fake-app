@@ -67,6 +67,7 @@ export default function AddComment({ addComment, user, postId }) {
               variant="outlined"
               inputProps={{ minLength: '2', maxLength: '100' }}
               onChange={handleChange}
+              multiline
               fullWidth
               required
             />

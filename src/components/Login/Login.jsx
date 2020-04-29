@@ -17,7 +17,7 @@ const Login = () => {
     setLoginValue('');
     const result = checkUser(loginValue);
     if (result) {
-      setError('Такого пользователя не существует');
+      setError('User is not found');
     }
   };
   const handleChange = (e) => {
@@ -48,7 +48,8 @@ const Login = () => {
         <div className="Login-form__error">
           {error}
           <br />
-          Попробуй Shanna@melissa.tv
+          try user: Shanna@melissa.tv<br />
+          try admin: Shanna@melissa.tv
         </div>
       )}
     </div>

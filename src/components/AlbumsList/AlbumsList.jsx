@@ -1,7 +1,7 @@
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from 'react-infinite-scroller';
 
+import Loader from '../Loader';
 import AlbumItem from '../AlbumItem';
 
 const PostsList = ({ albums, loadFunc, valueHasMore, isOverPosts }) => {
@@ -21,10 +21,7 @@ const PostsList = ({ albums, loadFunc, valueHasMore, isOverPosts }) => {
         </InfiniteScroll>
       )}
       {!valueHasMore && isOverPosts && (
-        <div className="Album-Page__progress">
-          <CircularProgress color="secondary" />
-          <div>Loading Albums...</div>
-        </div>
+         <Loader info="Albums" color="secondary" />
       )}
     </div>
   );

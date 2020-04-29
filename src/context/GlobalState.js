@@ -30,8 +30,8 @@ const initialState = {
 export const GlobalContextState = createContext();
 export const GlobalContextActions = createContext();
 
-const randomSliceArray = (array) => {
-  return array.sort(() => Math.random() - 0.5).slice(0, 5);
+const randomSliceArray = (array, num) => {
+  return array.sort(() => Math.random() - 0.5).slice(0, num);
 };
 
 export const GlobalContextProvider = ({ children }) => {
@@ -96,7 +96,7 @@ export const GlobalContextProvider = ({ children }) => {
   const getRandomPosts = () => {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then((response) => response.json())
-      .then((res) => randomSliceArray(res))
+      .then((res) => randomSliceArray(res, 5))
       .then((posts) =>
         dispatch({
           type: 'GET_RANDOM_POSTS',
@@ -119,7 +119,7 @@ export const GlobalContextProvider = ({ children }) => {
   const getRandomAlbums = () => {
     fetch('https://jsonplaceholder.typicode.com/albums')
       .then((response) => response.json())
-      .then((res) => randomSliceArray(res))
+      .then((res) => randomSliceArray(res, 8))
       .then((albums) =>
         dispatch({
           type: 'GET_RANDOM_ALBUMS',
@@ -218,7 +218,7 @@ export const GlobalContextProvider = ({ children }) => {
     });
   };
   const checkUser = (loginValue) => {
-    const userFilter = state.users.filter(({ email }) => email === loginValue);
+    const userFilter = state.users.filter(({ email }) => email.toLowerCase() === loginValue.toLowerCase());
 
     if (userFilter.length) {
       const [userObj] = userFilter;

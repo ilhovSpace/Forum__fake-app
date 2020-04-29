@@ -1,7 +1,9 @@
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from 'react-infinite-scroller';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
+import Loader from '../Loader';
 import PostItem from '../PostItem';
 
 const PostsList = ({ posts, loadFunc, valueHasMore, isOverPosts }) => {
@@ -18,12 +20,16 @@ const PostsList = ({ posts, loadFunc, valueHasMore, isOverPosts }) => {
           ))}
         </InfiniteScroll>
       )}
-      {!valueHasMore && isOverPosts && (
-        <div>
-          <CircularProgress />
-          <div>Loading...</div>
-        </div>
-      )}
+      {!valueHasMore && isOverPosts && <Loader info="posts" color="primary" />}
+      {!isOverPosts && ( 
+        <div className="Post-list_info">
+          <p>These are all the posts</p>
+          <Link to="/" className="my-link">
+            <Button variant="contained" color="primary" size="small">
+              home
+            </Button>
+          </Link>
+        </div>)}
     </div>
   );
 };

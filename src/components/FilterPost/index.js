@@ -1,2 +1,3 @@
-import FilterPost from './FilterPost.jsx';
+import FilterPost from './FilterPost';
+
 export default FilterPost;

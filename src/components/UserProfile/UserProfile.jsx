@@ -93,6 +93,15 @@ export default function UserProfile({ match }) {
     });
   };
 
+  const clearStates = () => {
+    setUserProfile({});
+    setUserEditPofile({});
+  };
+
+  useEffect(() => {
+    return clearStates;
+  }, []);
+
   return (
     <div className={classes.root}>
       <AppBar position="static">

@@ -15,7 +15,7 @@ export default function LightBox({ photo }) {
 
   return (
     <div>
-      <div className="Photo-item" onClick={ handleClickOpen }>
+      <div className="Photo-item" onClick={handleClickOpen}>
         <img src={photo.thumbnailUrl} alt="thumbnail" />
       </div>
       <Dialog

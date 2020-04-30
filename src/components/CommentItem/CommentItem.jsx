@@ -5,7 +5,7 @@ const CommentItem = ({ comment }) => {
     <div className="Comment-item">
       <h4>{comment.name}</h4>
       <p>{comment.body}</p>
-      <p className='Comment-item__author'>Author {comment.email}</p>
+      <p className="Comment-item__author">Author {comment.email}</p>
     </div>
   );
 };

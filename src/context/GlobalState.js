@@ -213,11 +213,15 @@ export const GlobalContextProvider = ({ children }) => {
     });
   };
   const checkUser = (loginValue) => {
-    const [ userObj ] = state.users.filter(({ email }) => email.toLowerCase() === loginValue.toLowerCase());
+    const [userObj] = state.users.filter(
+      ({ email }) => email.toLowerCase() === loginValue.toLowerCase(),
+    );
 
     if (userObj) {
-      const [admin] = state.admins.filter(item => item.toLowerCase() === userObj.email.toLowerCase())
-      if(admin){
+      const [admin] = state.admins.filter(
+        (item) => item.toLowerCase() === userObj.email.toLowerCase(),
+      );
+      if (admin) {
         dispatch({
           type: 'ADMIN_AUTHORIZATION',
           payload: userObj,

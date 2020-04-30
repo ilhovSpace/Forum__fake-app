@@ -5,50 +5,22 @@ body{
   color: #272C34
 }
 
-/* .App {
+.Home-page__header{
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-} */
-.Home-page__header{
-display: flex;
-justify-content: center;
-text-align: center;
-}
 .Home-page__body{
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .Posts-page{
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 10px;
 }
-
 
 .Post-item{
   border-radius: 10px;
@@ -58,6 +30,7 @@ text-align: center;
   -moz-box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
   box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
 }
+
 .Post-item__header{
   color: #4dabf5;
   font-size: 18px;
@@ -65,6 +38,7 @@ text-align: center;
   line-height: 4px;
   text-align: center;
 }
+
 .Post-item__author, .Post-item__id{
   opacity: 0.8;
 }
@@ -74,19 +48,23 @@ text-align: center;
   font-weight: bold;
   opacity: 0.95;
 }
+
 .Post-item__post{
   margin: 15px 0;
   font-weight: bold;
   opacity: 0.95;
 }
+
 .Post-item__btn{
   text-align: center;
 }
+
 .Link-style{
   text-decoration: none;
   color: #fff;
   cursor: pointer;
 }
+
 .dark-text{
   color: #282c34
 }
@@ -98,18 +76,22 @@ text-align: center;
   justify-content: center;
   height: 40vh;
 } 
+
 .Login-form__form{
   display: flex;
   justify-content: center;
 }
+
 .Login-form__error{
   color: red;
   margin-top: 20px;
 }
+
 .Appbar-logout{
   display: flex;
   justify-content: center;
 }
+
 .Appbar-logout__user{
   color: tomato;
   display: flex;
@@ -117,10 +99,11 @@ text-align: center;
   justify-content: center;
   margin-right: 20px;
 }
+
 .Post-List{
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .Post-list_info{
@@ -133,13 +116,16 @@ justify-content: center;
   flex-wrap: wrap;
   flex-direction: column;
 }
+
 .Post-Page__comments{
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .Post-Page__button{
   margin: 30px 0;
 }
+
 .Post-Page__header{
   margin-top: 20px;
   text-align: center;
@@ -148,12 +134,14 @@ justify-content: center;
   font-size: 0.8rem;
   opacity: 0.9;
 }
+
 .Post-Page__button, .Post-Page__comments, .Post-Page__post{
   width: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .Comment-item{
   background: #eef0f5;
   border: 1px solid #d0d6ee;
@@ -163,8 +151,8 @@ justify-content: center;
   max-width: 900px;
   overflow: hidden;
   -webkit-box-shadow: 2px 12px 35px -13px rgba(65,70,120,1);
--moz-box-shadow: 2px 12px 35px -13px rgba(65,70,120,1);
-box-shadow: 2px 12px 35px -13px rgba(65,70,120,1);
+  -moz-box-shadow: 2px 12px 35px -13px rgba(65,70,120,1);
+  box-shadow: 2px 12px 35px -13px rgba(65,70,120,1);
 }
 
 .Comment-item__author{
@@ -183,10 +171,9 @@ box-shadow: 2px 12px 35px -13px rgba(65,70,120,1);
   text-align: center;
 }
 
-  
 .Home-page__block > h3, .Home-page__albums > h3{
-margin-top: 90px;
-text-align: center;
+  margin-top: 90px;
+  text-align: center;
 }
 
 .Album-Page{
@@ -200,6 +187,7 @@ text-align: center;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .Album-item{
   text-align: center;
   display: flex;
@@ -213,21 +201,25 @@ text-align: center;
   -moz-box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
   box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
 }
+
 .Album-item__tilte{
   height: 90px;
 }
+
 .Album-item__block{
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-wrap: nowrap;
 }
+
 .Album-item__header{
   color: #f73378;
   font-size: 18px;
   font-weight: bold;
   line-height: 4px;
 }
+
 .Album-item__link{
   text-decoration: none;
 }
@@ -247,9 +239,11 @@ text-align: center;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .Album-page_info{
   margin-bottom: 40px;
 }
+
 .Photo-item{
   position: relative;
   background: #cfcfcf;
@@ -262,9 +256,11 @@ text-align: center;
   -moz-box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
   box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
 }
+
 .Photo-item:hover{
   opacity: 0.5;
 }
+
 .Photo-item__title{
   position: absolute;
   bottom: -10px;
@@ -274,6 +270,7 @@ text-align: center;
 .All-user-profiles a{
   text-decoration: none;
 }
+
 .All-user-profiles__items{
   display: flex;
   padding: 10px;
@@ -283,16 +280,17 @@ text-align: center;
   -moz-box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
   box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
 }
+
 .All-user-profiles__title{
   text-align: center;
   font-size: 1.5rem;
-
 }
 
 .User-profile__form{
   max-width: 900px;
   margin: 0 auto;
 }
+
 .User-profile__item{
   background: #efeff2;
   padding: 20px;
@@ -303,10 +301,10 @@ text-align: center;
   -moz-box-shadow: 2px 12px 35px -16px rgba(64,64,64,1);
   box-shadow: 2px 12px 35px -16px rgba(64,64,64,1);
 }
+
 .User-profile__item input {
   font-family: 'Baloo Tamma 2', cursive;
   margin-top: -2px;
-  
 }
 
 .User-profile__item input::-webkit-outer-spin-button,
@@ -317,6 +315,7 @@ text-align: center;
 .User-profile__btn-group{
   margin-top: 30px;
 }
+
 .User-profile__buttons{
   display: flex;
   justify-content: space-between;
@@ -326,6 +325,7 @@ text-align: center;
   font-family: 'Baloo Tamma 2', cursive;
   color: #272C34;
 }
+
 .Light_box__close{
   width: 50px;
   height: 50px;
@@ -342,6 +342,7 @@ text-align: center;
   box-sizing: content-box;
   position: relative;
 }
+
 .Light_box__title{
   position: absolute;
   bottom: 0;
@@ -349,16 +350,20 @@ text-align: center;
   overflow: hidden;
   opacity: 0.7;
 }
+
 .Light_box__image{
   display: flex;
 }
+
 .Light_box__image > img {
   width: 100%;
 }
+
 .Page404{
   margin-top: 100px;
   text-align: center;
 }
+
 .my-link{
   text-decoration: none;
 }
@@ -367,6 +372,7 @@ text-align: center;
   text-align: center;
   margin-top: 10px;
 }
+
 @media screen and (max-width: 450px){
   .Link-style{
     font-size: 16px;
@@ -383,11 +389,3 @@ text-align: center;
     font-size: 0.7rem;
   }
 }
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */

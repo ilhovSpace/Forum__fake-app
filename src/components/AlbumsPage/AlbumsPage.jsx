@@ -69,7 +69,7 @@ const AlbumsPage = () => {
         isDisabled={isDisabled}
       />
       {!albums.length ? (
-         <Loader info="Albums" color="secondary" />
+        <Loader info="Albums" color="secondary" />
       ) : (
         <AlbumsList
           albums={albums}

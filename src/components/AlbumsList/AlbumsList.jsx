@@ -21,7 +21,7 @@ const PostsList = ({ albums, loadFunc, valueHasMore, isOverPosts }) => {
         </InfiniteScroll>
       )}
       {!valueHasMore && isOverPosts && (
-         <Loader info="Albums" color="secondary" />
+        <Loader info="Albums" color="secondary" />
       )}
     </div>
   );

@@ -21,7 +21,7 @@ const PostsList = ({ posts, loadFunc, valueHasMore, isOverPosts }) => {
         </InfiniteScroll>
       )}
       {!valueHasMore && isOverPosts && <Loader info="posts" color="primary" />}
-      {!isOverPosts && ( 
+      {!isOverPosts && (
         <div className="Post-list_info">
           <p>These are all the posts</p>
           <Link to="/" className="my-link">
@@ -29,7 +29,8 @@ const PostsList = ({ posts, loadFunc, valueHasMore, isOverPosts }) => {
               home
             </Button>
           </Link>
-        </div>)}
+        </div>
+      )}
     </div>
   );
 };

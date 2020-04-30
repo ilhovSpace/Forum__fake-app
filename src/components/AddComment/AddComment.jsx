@@ -11,10 +11,9 @@ export default function AddComment({ addComment, user, postId }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState({
     postId,
-    name: '',
     email: user.isAuth && user.userData.email,
-    body: '',
   });
+
   const handleChange = (e) => {
     setValue({ ...value, [e.target.id]: e.target.value });
   };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -28,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AddPost() {
-  const { user } = React.useContext(GlobalContextState);
-  const { addNewPost } = React.useContext(GlobalContextActions);
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState({
+  const { user } = useContext(GlobalContextState);
+  const { addNewPost } = useContext(GlobalContextActions);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState({
     userId: user.isAuth && user.userData.id,
   });
 
@@ -86,7 +86,7 @@ export default function AddPost() {
               margin="dense"
               id="body"
               label="Post body"
-              placeholder="Placeholder"
+              type="text"
               variant="outlined"
               inputProps={{ minLength: '5', maxLength: '2000' }}
               onChange={handleChange}

@@ -8,9 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
 import UserMenu from '../UserMenu';
 import Drawer from '../Drawer';
-import {
-  GlobalContextState,
-} from '../../context/GlobalState';
+
+import { GlobalContextState } from '../../context/GlobalState';
 
 const useStyles = makeStyles((theme) => ({
   root: {

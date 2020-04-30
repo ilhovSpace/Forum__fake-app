@@ -270,6 +270,25 @@ text-align: center;
   bottom: -10px;
   display: none;
 }
+
+.All-user-profiles a{
+  text-decoration: none;
+}
+.All-user-profiles__items{
+  display: flex;
+  padding: 10px;
+  margin: 10px 0;
+  color: #282c34;
+  -webkit-box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
+  box-shadow: 1px 4px 31px -7px rgba(0,0,0,0.75);
+}
+.All-user-profiles__title{
+  text-align: center;
+  font-size: 1.5rem;
+
+}
+
 .User-profile__form{
   max-width: 900px;
   margin: 0 auto;
@@ -302,6 +321,11 @@ text-align: center;
   display: flex;
   justify-content: space-between;
 }
+
+.User-menu__link{
+  font-family: 'Baloo Tamma 2', cursive;
+  color: #272C34;
+}
 .Light_box__close{
   width: 50px;
   height: 50px;
@@ -330,6 +354,10 @@ text-align: center;
 }
 .Light_box__image > img {
   width: 100%;
+}
+.Page404{
+  margin-top: 100px;
+  text-align: center;
 }
 .my-link{
   text-decoration: none;

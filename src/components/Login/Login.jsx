@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
+
 import {
   GlobalContextState,
   GlobalContextActions,
 } from '../../context/GlobalState';
 
 const Login = () => {
-  const { user, users, checkUser } = useContext(GlobalContextState);
+  const { user, checkUser } = useContext(GlobalContextState);
   const actions = useContext(GlobalContextActions);
   const [error, setError] = useState('');
   const [loginValue, setLoginValue] = useState('');
-  console.log(users);
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     setLoginValue('');

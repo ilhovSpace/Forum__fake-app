@@ -4,17 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {
-  GlobalContextState,
-  GlobalContextActions,
-} from '../../context/GlobalState';
+import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
+import HomeIcon from '@material-ui/icons/Home';
+import BusinessIcon from '@material-ui/icons/Business';
+
+import { GlobalContextState } from '../../context/GlobalState';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -88,7 +85,7 @@ export default function UserProfile({ match }) {
       address: { ...userProfile.address, [e.target.name]: e.target.value },
     });
   };
-  
+
   const handleInputChangeCompany = (e) => {
     setUserEditPofile({
       ...userEditPofile,
@@ -107,22 +104,22 @@ export default function UserProfile({ match }) {
           aria-label="scrollable prevent tabs example"
         >
           <Tab
-            label="Page One"
-            icon={<PhoneIcon />}
+            label="Basic info"
+            icon={<AccessibilityNewIcon />}
             aria-label="phone"
             onClick={() => setEdit(false)}
             {...a11yProps(0)}
           />
           <Tab
-            label="Page One"
-            icon={<FavoriteIcon />}
+            label="Address"
+            icon={<HomeIcon />}
             aria-label="favorite"
             onClick={() => setEdit(false)}
             {...a11yProps(1)}
           />
           <Tab
-            label="Page One"
-            icon={<PersonPinIcon />}
+            label="Company"
+            icon={<BusinessIcon />}
             aria-label="person"
             onClick={() => setEdit(false)}
             {...a11yProps(2)}

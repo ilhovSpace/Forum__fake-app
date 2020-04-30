@@ -12,6 +12,7 @@ import { GlobalContextState } from '../../context/GlobalState';
 const useStyles = makeStyles({
   list: {
     width: 250,
+    fontSize: '1.3rem',
   },
   fullList: {
     width: 'auto',
@@ -24,7 +25,7 @@ export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     left: false,
   });
-console.log(user)
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === 'keydown' &&

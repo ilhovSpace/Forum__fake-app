@@ -24,7 +24,7 @@ export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     left: false,
   });
-
+console.log(user)
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === 'keydown' &&
@@ -68,7 +68,7 @@ export default function TemporaryDrawer() {
       <Divider />
       <List>
         {user.isAuth && (
-          <Link to="/profile" className="Link-style dark-text">
+          <Link to={`/profile/${user.userData.id}`} className="Link-style dark-text">
             <ListItem button key={'Profile'}>
               My Profile
             </ListItem>

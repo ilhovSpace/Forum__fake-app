@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PostsPage from '../components/PostsPage';
 import PostPage from '../components/PostPage';
@@ -8,8 +8,11 @@ import AlbumsPage from '../components/AlbumsPage';
 import AlbumPage from '../components/AlbumPage';
 import UserProfile from '../components/UserProfile';
 import AllUserProfiles from '../components/AllUserProfiles';
+import { GlobalContextState } from '../context/GlobalState';
 
 const AppRouter = () => {
+  const { user } = useContext(GlobalContextState)
+  console.log(user)
   return (
     <Switch>
       <Route exact path="/" component={HomePage} />
@@ -18,8 +21,8 @@ const AppRouter = () => {
       <Route path="/post/:id" component={PostPage} />
       <Route exact path="/albums" component={AlbumsPage} />
       <Route path="/album/:id" component={AlbumPage} />
-      <Route exact path="/profile" component={UserProfile} />
-      <Route exact path="/profiles" component={AllUserProfiles} />
+      <Route path="/profile/:id" component={user.isAuth ? UserProfile : Login} />
+      <Route exact path="/profiles" component={user.isAdmin ? AllUserProfiles : Login} />
     </Switch>
   );
 };

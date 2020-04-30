@@ -1,17 +1,11 @@
 import React, { createContext, useReducer, useMemo } from 'react';
 import AppReducer from './AppReducer';
 
-const TestUser = {
-  id: 2,
-  name: 'Ervin Howell',
-  username: 'Antonette',
-  email: 'Shanna@melissa.tv',
-};
 const initialState = {
   user: {
-    isAuth: true,
-    isAdmin: true,
-    userData: TestUser,
+    isAuth: false,
+    isAdmin: false,
+    userData: {},
   },
   posts: [],
   randomPosts: null,
@@ -19,6 +13,7 @@ const initialState = {
   albums: [],
   randomAlbums: null,
   users: [],
+  admins: ['Sincere@april.biz'],
   singlePost: {
     post: null,
     comments: null,
@@ -218,14 +213,21 @@ export const GlobalContextProvider = ({ children }) => {
     });
   };
   const checkUser = (loginValue) => {
-    const userFilter = state.users.filter(({ email }) => email.toLowerCase() === loginValue.toLowerCase());
+    const [ userObj ] = state.users.filter(({ email }) => email.toLowerCase() === loginValue.toLowerCase());
 
-    if (userFilter.length) {
-      const [userObj] = userFilter;
-      dispatch({
-        type: 'USER_AUTHORIZATION',
-        payload: userObj,
-      });
+    if (userObj) {
+      const [admin] = state.admins.filter(item => item.toLowerCase() === userObj.email.toLowerCase())
+      if(admin){
+        dispatch({
+          type: 'ADMIN_AUTHORIZATION',
+          payload: userObj,
+        });
+      } else {
+        dispatch({
+          type: 'USER_AUTHORIZATION',
+          payload: userObj,
+        });
+      }
     } else {
       return 'error';
     }

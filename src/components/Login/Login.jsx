@@ -48,8 +48,8 @@ const Login = () => {
         <div className="Login-form__error">
           {error}
           <br />
-          try user: Shanna@melissa.tv<br />
-          try admin: Shanna@melissa.tv
+          try user: Shanna@melissa.tv <br />
+          try admin: Sincere@april.biz
         </div>
       )}
     </div>

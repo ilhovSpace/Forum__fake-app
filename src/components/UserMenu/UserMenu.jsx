@@ -5,9 +5,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
-import { GlobalContextActions } from '../../context/GlobalState';
+import { GlobalContextActions, GlobalContextState } from '../../context/GlobalState';
 
 export default function SimpleMenu() {
+  const { user } = useContext(GlobalContextState);
   const { logout } = useContext(GlobalContextActions);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -37,7 +38,7 @@ export default function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Link to="/profile">
+        <Link to={`/profile/${user.userData.id}`}>
           <MenuItem onClick={handleClose}>My Profile</MenuItem>
         </Link>
         <MenuItem onClick={handleClose}>My Posts</MenuItem>

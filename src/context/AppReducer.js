@@ -112,12 +112,23 @@ export default (state, action) => {
           userData: action.payload,
         },
       };
+    case 'ADMIN_AUTHORIZATION':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          isAuth: true,
+          isAdmin: true,
+          userData: action.payload,
+        },
+      };
     case 'LOG_OUT':
       return {
         ...state,
         user: {
           ...state.user,
           isAuth: false,
+          isAdmin: false,
           userData: {},
         },
       };
